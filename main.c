@@ -42,7 +42,7 @@ int rec = 0;
 //IR setup
 int IRpin = A4;
 
-int PWMspeed = 100;  //(40%)
+int speed = 100;  //(40%)  (PWMspeed)
 
 enum location {one, two, three, bucket, centre};
 

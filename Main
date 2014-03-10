@@ -1,0 +1,100 @@
+//Track following
+
+//set motor pin values
+int E1 = 6;
+int M1 = 7;
+int E2 = 5;
+int M2 = 4;
+
+int pushPin = 3;
+
+//Line Sensor pins
+int left = A0;
+int center = A1;
+int right = A2;
+
+int PWMspeed = 100;  //(40%)
+
+int count = 0;
+
+#define LTHRESH 420
+#define CTHRESH 475
+#define RTHRESH 350
+
+void setup(){
+  
+  pinMode(E1, OUTPUT);
+  pinMode(M1, OUTPUT);
+  pinMode(E2, OUTPUT);
+  pinMode(M2, OUTPUT);
+  
+  pinMode(left, INPUT);
+  pinMode(center, INPUT);
+  pinMode(right, INPUT);
+  
+  Serial.begin(9600);
+  
+  while(digitalRead(pushPin))  
+  //reads high on pushbtn when not pressed
+  {} //do nothing
+  
+  while(!(digitalRead(pushPin)))
+  {}
+
+}
+
+
+void loop(){
+  
+  digitalWrite(M1, HIGH);
+  digitalWrite(M2, HIGH); 
+  
+// if(count % 2 == 0){ 
+//   digitalWrite(M1, HIGH);
+//   digitalWrite(M2, LOW);
+// }
+// else {
+//   digitalWrite(M1, LOW);
+//   digitalWrite(M2, HIGH);  
+// }
+ 
+ //while side sensors white, forward 
+ while(analogRead(right) > RTHRESH && analogRead(left) > LTHRESH)
+ {
+  analogWrite(E1, PWMspeed);
+  analogWrite(E2, PWMspeed);
+ }
+
+ //pause
+ analogWrite(E1, 0);
+ analogWrite(E2, 0);
+ delay(500);
+ 
+ digitalWrite(M1, HIGH);
+ digitalWrite(M2, LOW);
+ 
+// Serial.print("\n");
+// Serial.print(leftval);
+// Serial.print("   ");
+// Serial.print(centerval);
+// Serial.print("   ");
+// Serial.print(rightval);
+ 
+ 
+ while(analogRead(right) > RTHRESH && analogRead(left) > LTHRESH && analogRead(center) > CTHRESH)
+ {
+   analogWrite(E1, PWMspeed);
+   analogWrite(E2, PWMspeed);
+   //delay(1000+500*count);
+ }
+
+
+ //pause
+ analogWrite(E1, 0);
+ analogWrite(E2, 0);
+ delay(20000);
+ 
+ //count++;
+ 
+
+}//end loop

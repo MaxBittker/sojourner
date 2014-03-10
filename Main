@@ -1,100 +1,113 @@
 //Track following
 
+#include <Servo.h>
+Servo pan, grip, tilt;
+
+//servo saved positions
+#define GRIPclose 200
+#define GRIPopen 80
+#define TILThoriz 70
+#define TILTup 160
+#define PANcentre 90
+#define PANleft 30
+
 //set motor pin values
 int E1 = 6;
 int M1 = 7;
 int E2 = 5;
 int M2 = 4;
 
-int pushPin = 3;
+int leftbump = 2;   //wait push button
+int rightbump = 3;
 
 //Line Sensor pins
 int left = A0;
 int center = A1;
 int right = A2;
 
-int PWMspeed = 100;  //(40%)
-
-int count = 0;
-
+//uncalibrated!
 #define LTHRESH 420
 #define CTHRESH 475
 #define RTHRESH 350
 
+//encoder pins
+int le = 11;
+int re = 12;
+
+//counters
+int lec = 0;
+int rec = 0;
+
+//IR setup
+int IRpin = A4;
+
+int PWMspeed = 100;  //(40%)
+
+
 void setup(){
   
+  //servo pin assignment
+  grip.attach(10);
+  tilt.attach(9);
+  pan.attach(8);
+  
+  //set servo high
+  grip.write(GRIPopen);
+  tilt.write(TILTup);
+  pan.write(PANcentre);
+  
+  //motor pin assignmnet
   pinMode(E1, OUTPUT);
   pinMode(M1, OUTPUT);
   pinMode(E2, OUTPUT);
   pinMode(M2, OUTPUT);
   
+  //motor direction - forward
+  digitalWrite(M1, HIGH);
+  digitalWrite(M2, HIGH);
+  analogWrite(E1, 0);
+  analogWrite(E2, 0);
+  
+  //light sensing pin input
   pinMode(left, INPUT);
   pinMode(center, INPUT);
   pinMode(right, INPUT);
   
+  //interrupts
+  attachInterrupt(0, leftEn, RISING);
+  attachInterrupt(1, rightEn, RISING);
+  
   Serial.begin(9600);
   
-  while(digitalRead(pushPin))  
-  //reads high on pushbtn when not pressed
-  {} //do nothing
-  
-  while(!(digitalRead(pushPin)))
-  {}
+  waitButton();
 
 }
 
 
 void loop(){
   
-  digitalWrite(M1, HIGH);
-  digitalWrite(M2, HIGH); 
   
-// if(count % 2 == 0){ 
-//   digitalWrite(M1, HIGH);
-//   digitalWrite(M2, LOW);
-// }
-// else {
-//   digitalWrite(M1, LOW);
-//   digitalWrite(M2, HIGH);  
-// }
- 
- //while side sensors white, forward 
- while(analogRead(right) > RTHRESH && analogRead(left) > LTHRESH)
- {
-  analogWrite(E1, PWMspeed);
-  analogWrite(E2, PWMspeed);
- }
-
- //pause
- analogWrite(E1, 0);
- analogWrite(E2, 0);
- delay(500);
- 
- digitalWrite(M1, HIGH);
- digitalWrite(M2, LOW);
- 
-// Serial.print("\n");
-// Serial.print(leftval);
-// Serial.print("   ");
-// Serial.print(centerval);
-// Serial.print("   ");
-// Serial.print(rightval);
- 
- 
- while(analogRead(right) > RTHRESH && analogRead(left) > LTHRESH && analogRead(center) > CTHRESH)
- {
-   analogWrite(E1, PWMspeed);
-   analogWrite(E2, PWMspeed);
-   //delay(1000+500*count);
- }
-
-
- //pause
- analogWrite(E1, 0);
- analogWrite(E2, 0);
- delay(20000);
- 
- //count++;
  
 
 }//end loop
+
+
+void waitButton(){
+  
+  while(digitalRead(leftbump))  //reads high on pushbtn when not pressed
+  {} //do nothing
+  
+  while(!(digitalRead(leftbump)))
+  {}
+}
+
+
+//  --- FUNCTIONS TO INCREMENT ENCODER  ---
+void leftEn() {
+  lec++;
+}
+
+void rightEn() {
+  rec++;
+}
+

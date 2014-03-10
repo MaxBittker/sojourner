@@ -44,7 +44,7 @@ int IRpin = A4;
 
 int speed = 100;  //(40%)  (PWMspeed)
 
-enum location {one, two, three, bucket, centre};
+enum location {one, two, three, bucket, centre, fail};
 
 location currentPos = centre;
 location destination;
@@ -93,12 +93,11 @@ void setup(){
 
 void loop(){
   
-  //wait for a while, get destination from bluetooth: destination = getLoc();
+    destination = getLoc();
+    if(destination == fail)
+      destination = findLoc();
   
-  // have a case for if that doesn't work: destination = findLoc();
-  navigate(currentPos, destination);
-  
-  
+    navigate(currentPos, destination);
 
 }//end loop
 
@@ -110,10 +109,17 @@ int navigate(location start, location end) {
   
 }
 
+//function to get location from bluetooth
 location getLoc(){
   
-  //function to get location from bluetooth
+  int waitTime = 5000;
+  long nowTime = millis();
   
+  while((millis() - nowTime) < waitTime) {  
+    
+    //bluetooth data getting code
+    
+  }
   
 }
 
@@ -121,8 +127,7 @@ location findLoc(){
   
   location target;
   
-  //accepts as an overide/wait the bluetooth command to know which target
-  //OR drives forward and turns until it finds the blinking target
+  //drives forward and turns until it finds the blinking target
   
   return target;
   

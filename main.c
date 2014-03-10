@@ -44,6 +44,10 @@ int IRpin = A4;
 
 int PWMspeed = 100;  //(40%)
 
+enum location {one, two, three, bucket, centre};
+
+location currentPos = centre;
+location destination;
 
 void setup(){
   
@@ -81,13 +85,80 @@ void setup(){
   Serial.begin(9600);
   
   waitButton();
+  
+  //spin and find target - or take input
 
 }
 
 
 void loop(){
+  
+  //wait for a while, get destination from bluetooth: destination = getLoc();
+  
+  // have a case for if that doesn't work: destination = findLoc();
+  navigate(currentPos, destination);
+  
+  
 
 }//end loop
+
+int navigate(location start, location end) {
+  
+  //case statement to determine which direction to face and drive
+  
+  //lineFollow
+  
+}
+
+location getLoc(){
+  
+  //function to get location from bluetooth
+  
+  
+}
+
+location findLoc(){
+  
+  location target;
+  
+  //accepts as an overide/wait the bluetooth command to know which target
+  //OR drives forward and turns until it finds the blinking target
+  
+  return target;
+  
+}
+
+void pivot(int angle)
+{
+  digitalWrite(M1, LOW);
+  digitalWrite(M2, LOW);
+  analogWrite(E1, PWMspeed);
+  analogWrite(E2, PWMspeed); 
+  
+  delay(1500);
+  
+  if (angle > 0)
+  {
+    digitalWrite(M1, LOW);
+    digitalWrite(M2, HIGH);
+  }  
+  else if (angle < 0)
+  {
+    digitalWrite(M1, HIGH);
+    digitalWrite(M2, LOW);
+  }
+
+  analogWrite(E1, PWMspeed);
+  analogWrite(E2, PWMspeed);
+  delay(10*abs(angle));
+}
+
+void forward(int speed) {
+  digitalWrite(M1, HIGH);
+  digitalWrite(M2, HIGH);
+  analogWrite(E1, speed);
+  analogWrite(E2, speed);  
+}
 
 
 void waitButton(){

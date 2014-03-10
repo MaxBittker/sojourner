@@ -1,4 +1,4 @@
-//Track following
+//Group 35  (MB, MW, SW)
 
 #include <Servo.h>
 Servo pan, grip, tilt;
@@ -17,6 +17,7 @@ int M1 = 7;
 int E2 = 5;
 int M2 = 4;
 
+//set bumper pins
 int leftbump = 2;   //wait push button
 int rightbump = 3;
 
@@ -85,9 +86,6 @@ void setup(){
 
 
 void loop(){
-  
-  
- 
 
 }//end loop
 

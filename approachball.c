@@ -8,3 +8,6 @@ call force sensing error checking
 if error function returns 1(no error)
 set destination=3
 call navigate
+
+if error function returns 0 (not gripping ball)
+pause and enter shuffle functions by bluetooth

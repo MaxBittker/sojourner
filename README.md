@@ -1,21 +1,42 @@
 sojourner
 =========
-tasks: 
+TODO: 
 
-  robust line following fn (2/10)
-  
-  robust object gripping fn (2/10)
-  
-  turning fn (0/10)
+major functions: 
 
-  bucket approaching&dropping fn (0/10)
+    main logic
   
-  calbration of light sensors (0/10)
+    navigate logic
+
+    line following fn 
+   
+    approach ball
   
-  calibration of encoders (0/10)
+    approach bucket
+  
+helper functions:
+
+    turn(degrees) (done)
+   
+    turn(number of lines to pass)
+   
+    drive (done)
+  
+    grip 
+  
+    get bluetooth destination command
   
   
-  main workflow/logic (draw a diagram first) (dealing with confusion) (accepts BT commands) (0/10)
+other: 
+
+    calbration of light sensors (0/10)
+  
+    calibration of encoders (0/10)
+  
+     nice logic flowchart for debugging(1/10)
+  
+  
+  
   
   
   

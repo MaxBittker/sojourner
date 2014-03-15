@@ -25,12 +25,12 @@ boolean navigate(location start, location destination)  {
                     if(AnalogRead(left)>LTHRESH)
                         {FIX IT} //went too far :(
                  }
-            lineFollow();
+            //lineFollow();
             approachBall();
             return: navigate(destination,bucket);
             break;
           case one:
-            lineFollow();
+           // lineFollow();
             approachBall();
             return: navigate(destination, bucket);
             break; 
@@ -46,7 +46,7 @@ boolean navigate(location start, location destination)  {
                     if(AnalogRead(right)>RTHRESH)
                         {FIX IT} //went too far :(
                  }
-            lineFollow();
+            //lineFollow();
             approachBall();
             return: navigate(destination,bucket);
             break;
@@ -75,14 +75,14 @@ boolean navigate(location start, location destination)  {
           case zero:
             pivot(-140);
             braveForray(0); //angle right
-            lineFollow();
+           // lineFollow();
             approachBall();
             return: navigate(destination,bucket);
             break;
           case one:
         
             turn180();
-            lineFollow();
+           // lineFollow();
             approachBall();
             return: navigate(destination, bucket);
             break; 
@@ -90,7 +90,7 @@ boolean navigate(location start, location destination)  {
           case two:
             pivot(140);
             braveForray(1); //angle left
-            lineFollow();
+           // lineFollow();
             approachBall();
 
             return: navigate(destination,bucket);
@@ -109,7 +109,7 @@ boolean navigate(location start, location destination)  {
       case zero: //bucket is to the right
           pivot(140);
           braveForray(1); //(angle left);
-          lineFollow();
+         // lineFollow();
          return: approachBucket();
 
         break;
@@ -117,7 +117,7 @@ boolean navigate(location start, location destination)  {
 
          pivot(-140);
          braveForray(0); //angle right
-         lineFollow();
+         //lineFollow();
 
         return: approachBucket();
 
@@ -125,7 +125,7 @@ boolean navigate(location start, location destination)  {
       case one:    //across from bucket
 
         turn180();
-        lineFollow();
+       // lineFollow();
         
         return: approachBucket();
         break;

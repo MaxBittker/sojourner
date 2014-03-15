@@ -1,10 +1,10 @@
   
 /* navigate.c */
 
-#include "lineFollow.c"
-#include "approachBall.c"
-#include "approachBucket.c"
-#include "turn180.c"
+#include "lineFollow.h"
+#include "approachBall.h"
+#include "approachBucket.h"
+#include "turn180.h"
 
 
 boolean navigate(location start, location destination)  {

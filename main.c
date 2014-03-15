@@ -101,31 +101,37 @@ void loop(){
 
 }//end loop
 
-int navigate(location start, location end) {
-  
-  //case statement to determine which direction to face and drive
-  
-  //lineFollow
-  
-}
-
 //function to get location from bluetooth
 location getLoc(){
   
-  int waitTime = 5000;
-  long nowTime = millis();
+	int waitTime = 5000;
+	long nowTime = millis();
   
-  while((millis() - nowTime) < waitTime) {  
+	location target = fail;
+	int ch;
+  
+	while((millis() - nowTime) < waitTime) {  
+		if(Serial.available())
+			int ch = Serial.read();
+	}
     
-    //bluetooth data getting code
-    
-  }
+	switch(ch) {
+		case '0': target = zero;
+				break;
+		case '1': target = one;
+				break;
+		case '2': target = two;
+				break;
+	} 
+  
+	return target;
   
 }
 
+//doesn't need to be written yet b/c only used if bluetooth fails
 location findLoc(){
   
-  location target;
+  location target = fail;
   
   //drives forward and turns until it finds the blinking target
   
@@ -164,7 +170,6 @@ void forward(int speed) {
   analogWrite(E1, speed);
   analogWrite(E2, speed);  
 }
-
 
 void waitButton(){
   

@@ -44,7 +44,7 @@ int IRpin = A4;
 
 int speed = 100;  //(40%)  (PWMspeed)
 
-enum location {one, two, three, bucket, centre, fail};
+enum location {bucket, zero, one, two, centre, fail}; //counts ccw from bucket  
 
 location currentPos = centre;
 location destination;

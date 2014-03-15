@@ -10,9 +10,9 @@ major functions:
 
     line following fn 
    
-    approach ball
+    approach ball (need to add shuffle functions)
   
-    approach bucket
+    approach bucket (done)
   
 helper functions:
 

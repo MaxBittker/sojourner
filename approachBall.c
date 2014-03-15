@@ -5,7 +5,7 @@ boolean approachBall() {
   grip.write(GRIPopen);
   tilt.write(TILTup);
   
-  linefollow()
+  lineFollow()
   
   boolean ball = ObjGrab();
    

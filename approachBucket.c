@@ -2,7 +2,7 @@ boolean approachBucket() {
   
   tilt.write(TILTup);
   
-  linefollow()
+  lineFollow()
   
   grip.write(GRIPopen)
   

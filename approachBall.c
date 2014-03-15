@@ -11,12 +11,15 @@ boolean approachBall() {
    
   if (ball == true) {
     destination=3
-    backup (small amount to allow turning)
+    backward(100)
+    delay(100)
+    backward(0)
     return (true) 
   }
   
   if (ball == false)
-    pause and enter shuffle functions by bluetooth
+    backward(0) //stop
+    //enter shuffle functions
   
 }
 

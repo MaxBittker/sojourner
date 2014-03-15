@@ -42,7 +42,7 @@ int rec = 0;
 //IR setup
 int IRpin = A4;
 
-int speed = 100;  //(40%)  (PWMspeed)
+int PWMspeed = 100;  //(40%)  (PWMspeed)
 
 enum location {bucket, zero, one, two, centre, fail}; //counts ccw from bucket  
 
@@ -96,8 +96,17 @@ void loop(){
     destination = getLoc();
     if(destination == fail)
       destination = findLoc();
+	  
+	  switch(target) {
+		case zero: pivot(45);
+				break;
+		case one: forward(PWMspeed)
+				break;
+		case two: pivot(-45);
+				break;
+	} 
   
-    navigate(currentPos, destination);
+    //navigate(currentPos, destination);
 
 }//end loop
 
@@ -141,12 +150,10 @@ location findLoc(){
 
 void pivot(int angle)
 {
-  digitalWrite(M1, LOW);
-  digitalWrite(M2, LOW);
   analogWrite(E1, PWMspeed);
   analogWrite(E2, PWMspeed); 
   
-  delay(1500);
+  delay(500);
   
   if (angle > 0)
   {
@@ -159,14 +166,19 @@ void pivot(int angle)
     digitalWrite(M2, LOW);
   }
 
-  analogWrite(E1, PWMspeed);
-  analogWrite(E2, PWMspeed);
   delay(10*abs(angle));
 }
 
 void forward(int speed) {
   digitalWrite(M1, HIGH);
   digitalWrite(M2, HIGH);
+  analogWrite(E1, speed);
+  analogWrite(E2, speed);  
+}
+
+void backward(int speed) {
+  digitalWrite(M1, LOW);
+  digitalWrite(M2, LOW);
   analogWrite(E1, speed);
   analogWrite(E2, speed);  
 }

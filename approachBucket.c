@@ -6,7 +6,9 @@ boolean approachBucket() {
   
   grip.write(GRIPopen)
   
-  //backup to allow for maneuvering 
-  
+  backward(100)
+    delay(100)
+    backward(0)
+    
   return (true)
  

@@ -28,7 +28,7 @@ boolean ObjGrab() {
   tilt.write(TILThoriz);
   grip.write(GRIPclose)
   
-  if (pressureSensor==true){
+  if (analogRead(A5)>100){
     return(true)
   }
   else(){

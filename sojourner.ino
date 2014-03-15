@@ -1,50 +1,19 @@
 //Group 35  (MB, MW, SW)
 
 #include "enum_stuff.h"
+#include "lineFollow.h"
+#include "navigate.h"
+#include "approachBucket.h"
+#include "approachBall.h"
+#include "constants.h"
 
 #include <Servo.h>
 Servo pan, grip, tilt;
-
-//servo saved positions
-#define GRIPclose 200
-#define GRIPopen 80
-#define TILThoriz 70
-#define TILTup 160
-#define PANcentre 90
-#define PANleft 30
-
-//set motor pin values
-int E1 = 6;
-int M1 = 7;
-int E2 = 5;
-int M2 = 4;
-
-//set bumper pins
-int leftbump = 2;   //wait push button
-int rightbump = 3;
-
-//Line Sensor pins
-int left = A0;
-int middle = A1;
-int right = A2;
-
-//uncalibrated!
-#define LTHRESH 420
-#define MTHRESH 475
-#define RTHRESH 350
-
-//encoder pins
-int le = 11;
-int re = 12;
 
 //counters
 int lec = 0;
 int rec = 0;
 
-//IR setup
-int IRpin = A4;
-
-int PWMspeed = 100;  //(40%)  (PWMspeed)
 
 location currentPos = centre;
 location destination;
@@ -145,6 +114,8 @@ void waitButton(){
   while(!(digitalRead(leftbump)))
   {}
 }
+
+
 
 
 //  --- FUNCTIONS TO INCREMENT ENCODER  ---

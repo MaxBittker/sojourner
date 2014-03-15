@@ -1,25 +1,31 @@
 //Line Following Code
 #include <Arduino.h>
+#include "constants.h"
+extern int speed;
+
+void forward(int speed);
+
 //Follow a straight line and then continue driving in that straight line when range less than some value
-lineFollow() {
+boolean lineFollow(){
   
-  while(digitalRead(leftBump) == 0 && digitalRead(rightBump)==0){
+ 
+  while(digitalRead(leftbump) == 0 && digitalRead(rightbump)==0){
 
-    if(getRange() < 380){
+    if(analogRead(IRpin) < 380){
 
-forward(speed/2);
-//digitalWrite(E1,speed/2); //if close, cut speed
-//digitalWrite(E2,speed/2);
+        forward(speed/2);
+        //digitalWrite(E1,speed/2); //if close, cut speed
+        //digitalWrite(E2,speed/2);
     } 
 
  //   digitalWrite(M1, HIGH); //go
   //  digitalWrite(M2, HIGH); 
      forward(speed);
     //while side sensors white, forward 
-     while(analogRead(right) > RTHRESH && analogRead(left) > LTHRESH && analogRead(center) && digitalRead(leftBump) == 0 && digitalRead(rightBump)==0) //loop for when happy
+     while(analogRead(right) > RTHRESH && analogRead(left) > LTHRESH && analogRead(middle) && digitalRead(leftbump) == 0 && digitalRead(rightbump)==0) //loop for when happy
      {
      
-        if(getRange() < 380)
+        if(analogRead(IRpin) < 380)
         forward(speed/2);
     
         else
@@ -47,7 +53,6 @@ forward(speed/2);
        digitalWrite(M2, LOW);
        analogWrite(E2,speed);
        analogWrite(E1,speed);
-       turntime = 100;
      }
      
      //same left   
@@ -56,18 +61,13 @@ forward(speed/2);
        digitalWrite(M1, LOW);
        analogWrite(E1,speed);
        analogWrite(E2,speed);
-       turntime = 100;
      }
      
-     delay(turntime); 
+     delay(100); 
      
   }//end while
 
 } //end line follow
 
 
-int getRange()
-{
-  return(analogRead(IRpin)); 
-}
-   
+

@@ -1,11 +1,10 @@
   
 /* navigate.c */
 
-#include "lineFollow.h"
-#include "approachBall.h"
-#include "approachBucket.h"
-#include "turn180.h"
-
+boolean approachBall();
+void pivot(int angle);
+boolean braveForray(int expectedDirection);
+boolean approachBucket();
 
 boolean navigate(location start, location destination)  {
   
@@ -15,40 +14,40 @@ boolean navigate(location start, location destination)  {
     
     switch(destination){
           case zero:
-            while(AnalogRead(left)>LTHRESH && AnalogRead(middle)>MTHRESH && AnalogRead(right)>RTHRESH)
+            while(analogRead(left)>LTHRESH && analogRead(middle)>MTHRESH && analogRead(right)>RTHRESH)
                 {
                 //spin right (possibly with speed as a function of time)
                 }
-                while(AnalogRead(middle)>MTHRESH)
+                while(analogRead(middle)>MTHRESH)
                   {
                 //spin right slowly 
-                    if(AnalogRead(left)>LTHRESH)
-                        {FIX IT} //went too far :(
+                    if(analogRead(left)>LTHRESH){}
+                        //{//FIX IT //went too far :(
                  }
             //lineFollow();
             approachBall();
-            return: navigate(destination,bucket);
+            return navigate(destination,bucket);
             break;
           case one:
            // lineFollow();
             approachBall();
-            return: navigate(destination, bucket);
+            return navigate(destination, bucket);
             break; 
 
           case two:
-             while(AnalogRead(left)>LTHRESH && AnalogRead(middle)>MTHRESH && AnalogRead(right)>RTHRESH)
+             while(analogRead(left)>LTHRESH && analogRead(middle)>MTHRESH && analogRead(right)>RTHRESH)
                 {
                 //spin left (possibly with speed as a function of time)
                 }
-                while(AnalogRead(middle)>MTHRESH)
+                while(analogRead(middle)>MTHRESH)
                   {
                 //spin right slowly 
-                    if(AnalogRead(right)>RTHRESH)
-                        {FIX IT} //went too far :(
+                    if(analogRead(right)>RTHRESH){}
+                        //{FIX IT} //went too far :(
                  }
             //lineFollow();
             approachBall();
-            return: navigate(destination,bucket);
+            return navigate(destination,bucket);
             break;
 
           default:
@@ -69,7 +68,7 @@ boolean navigate(location start, location destination)  {
     
   else //6 cases
   {
-    if(startLocation == bucket)//if we're at a basket location
+    if(start == bucket)//if we're at a basket location
       {
         switch(destination){
           case zero:
@@ -77,14 +76,14 @@ boolean navigate(location start, location destination)  {
             braveForray(0); //angle right
            // lineFollow();
             approachBall();
-            return: navigate(destination,bucket);
+            return navigate(destination,bucket);
             break;
           case one:
         
-            turn180();
+            pivot(180);
            // lineFollow();
             approachBall();
-            return: navigate(destination, bucket);
+            return navigate(destination, bucket);
             break; 
 
           case two:
@@ -93,7 +92,7 @@ boolean navigate(location start, location destination)  {
            // lineFollow();
             approachBall();
 
-            return: navigate(destination,bucket);
+            return navigate(destination,bucket);
             break;
 
              default:
@@ -105,12 +104,12 @@ boolean navigate(location start, location destination)  {
     else //if we're at a ball location
       {
         
-         switch (startLocation) {
+         switch (start) {
       case zero: //bucket is to the right
           pivot(140);
           braveForray(1); //(angle left);
          // lineFollow();
-         return: approachBucket();
+         return approachBucket();
 
         break;
       case two:    //bucket is to the left
@@ -119,15 +118,15 @@ boolean navigate(location start, location destination)  {
          braveForray(0); //angle right
          //lineFollow();
 
-        return: approachBucket();
+        return approachBucket();
 
         break;
       case one:    //across from bucket
 
-        turn180();
+        pivot(180);
        // lineFollow();
         
-        return: approachBucket();
+        return approachBucket();
         break;
 
       default:
@@ -139,4 +138,10 @@ boolean navigate(location start, location destination)  {
     
   }
   
+}
+}  //end nav probably
+
+
+boolean braveForray(int expectedDirection){
+  //TODO
 }

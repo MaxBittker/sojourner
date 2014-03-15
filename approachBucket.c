@@ -1,9 +1,8 @@
-
 boolean approachBucket() {
   
   tilt.write(TILTup);
   
-  //line follow until RIGHT BUMPER is hit (range finder to control speed?)
+  linefollow()
   
   grip.write(GRIPopen)
   

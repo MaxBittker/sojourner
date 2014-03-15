@@ -12,6 +12,7 @@ boolean approachBall() {
   if (ball == true) {
     destination=3
     backup (small amount to allow turning)
+    return (true) 
   }
   
   if (ball == false)
@@ -22,7 +23,15 @@ boolean approachBall() {
 
 boolean ObjGrab() {
   tilt.write(TILThoriz);
-  close gripper etc...
+  grip.write(GRIPclose)
+  
+  if (pressureSensor==true){
+    return(true)
+  }
+  else(){
+    return(false)
+  }
+ 
 }
 
 

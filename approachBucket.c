@@ -1,5 +1,13 @@
-when navigate returns a 1 and destination=3
-raise ball to correct height
-line follow until RIGHT BUMPER is hit (range finder to control speed?)
-release ball
-back up to allow navigate room to maneuver
+
+boolean approachBucket() {
+  
+  tilt.write(TILTup);
+  
+  //line follow until RIGHT BUMPER is hit (range finder to control speed?)
+  
+  grip.write(GRIPopen)
+  
+  //backup to allow for maneuvering 
+  
+  return (true)
+ 

@@ -5,7 +5,7 @@ boolean approachBall() {
   grip.write(GRIPopen);
   tilt.write(TILTup);
   
-  //line follow until BOTH BUMPERS are hit (range finder to control speed?)
+  linefollow()
   
   boolean ball = ObjGrab();
    

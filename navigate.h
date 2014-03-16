@@ -29,7 +29,7 @@ boolean navigate(location start, location destination)  {
                 while(analogRead(middle)>MTHRESH) //while middle sensor reads white
                   {
                     analogWrite(E1, speed/4);
-                    analogWrite(E2, speed)/4; 
+                    analogWrite(E2, speed/4); 
 
                     if(analogRead(left)>LTHRESH){
                        digitalWrite(M1, HIGH); //second chance if it misses
@@ -58,7 +58,7 @@ boolean navigate(location start, location destination)  {
                 while(analogRead(middle)>MTHRESH)
                   {
                     analogWrite(E1, speed/4);
-                    analogWrite(E2, speed)/4; 
+                    analogWrite(E2, speed/4); 
 
                     if(analogRead(right)>RTHRESH){
                        digitalWrite(M1, LOW); //second chance if it misses
@@ -169,9 +169,9 @@ boolean braveForray(int expectedDirection){
 }
 forward(speed/5);
  while(analogRead(middle)>MTHRESH)
- {delay(10)}
+ {delay(10);}
 forward(0);
-return;
+return(true);
 
    }
 

@@ -3,6 +3,8 @@
 
 boolean approachBall();
 void pivot(int angle);
+void forward(int speed);
+
 boolean braveForray(int expectedDirection);
 boolean approachBucket();
 
@@ -14,15 +16,24 @@ boolean navigate(location start, location destination)  {
     
     switch(destination){
           case zero:
-            while(analogRead(left)>LTHRESH && analogRead(middle)>MTHRESH && analogRead(right)>RTHRESH)
+            while(analogRead(right)>RTHRESH)
                 {
-                //spin right (possibly with speed as a function of time)
+                //spin right while all sensors are white (possibly with speed as a function of time)
+                  analogWrite(E1, speed/2);
+                  analogWrite(E2, speed/2); 
+
+                  digitalWrite(M1, LOW);
+                  digitalWrite(M2, HIGH);
+ 
                 }
-                while(analogRead(middle)>MTHRESH)
+                while(analogRead(middle)>MTHRESH) //while middle sensor reads white
                   {
-                //spin right slowly 
-                    if(analogRead(left)>LTHRESH){}
-                        //{//FIX IT //went too far :(
+                    analogWrite(E1, speed/4);
+                    analogWrite(E2, speed)/4; 
+
+                    if(analogRead(left)>LTHRESH){
+                       digitalWrite(M1, HIGH); //second chance if it misses
+                       digitalWrite(M2, LOW);}
                  }
             //lineFollow();
             approachBall();
@@ -35,15 +46,23 @@ boolean navigate(location start, location destination)  {
             break; 
 
           case two:
-             while(analogRead(left)>LTHRESH && analogRead(middle)>MTHRESH && analogRead(right)>RTHRESH)
+             while(analogRead(left)>LTHRESH)
                 {
                 //spin left (possibly with speed as a function of time)
+                    analogWrite(E1, speed/2);
+                    analogWrite(E2, speed/2); 
+
+                    digitalWrite(M1, HIGH);
+                    digitalWrite(M2, LOW);
                 }
                 while(analogRead(middle)>MTHRESH)
                   {
-                //spin right slowly 
-                    if(analogRead(right)>RTHRESH){}
-                        //{FIX IT} //went too far :(
+                    analogWrite(E1, speed/4);
+                    analogWrite(E2, speed)/4; 
+
+                    if(analogRead(right)>RTHRESH){
+                       digitalWrite(M1, LOW); //second chance if it misses
+                       digitalWrite(M2, HIGH);}
                  }
             //lineFollow();
             approachBall();
@@ -143,5 +162,17 @@ boolean navigate(location start, location destination)  {
 
 
 boolean braveForray(int expectedDirection){
-  //TODO
+  forward(speed);
+
+   while(analogRead(left)>LTHRESH && analogRead(middle)>MTHRESH && analogRead(right)>RTHRESH){
+{delay(10); //possibly reduce speed as a fn of time!
+}
+forward(speed/5);
+ while(analogRead(middle)>MTHRESH)
+ {delay(10)}
+forward(0);
+return;
+
+   }
+
 }

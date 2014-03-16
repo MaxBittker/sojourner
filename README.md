@@ -6,7 +6,7 @@ major functions:
 
     main logic
   
-    navigate logic
+    navigate logic 
 
     line following fn 
    

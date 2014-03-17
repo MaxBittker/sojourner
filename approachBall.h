@@ -33,7 +33,9 @@ boolean approachBall() {
 
 boolean ObjGrab() {
   tilt.write(TILThoriz);
+  delay(300)
   grip.write(GRIPclose);
+  delay(300)
   
   if (analogRead(A5)>100){
     return(true);

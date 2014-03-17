@@ -11,7 +11,7 @@ location getLoc(){
 	location target = fail;
 	int ch = '?';
   
-	while((millis() - nowTime) < waitTime && ch == 'x') {  
+	while((millis() - nowTime) < waitTime && ch == '?') {  
 		if(Serial.available()) {
 			ch = Serial.read();
                         Serial.write(ch);

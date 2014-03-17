@@ -66,7 +66,7 @@ void loop(){
     destination = getLoc();
     if(destination == fail)
       destination = findLoc();
-  
+    if(destination !=fail)
     navigate(currentPos, destination);
 
 }//end loop

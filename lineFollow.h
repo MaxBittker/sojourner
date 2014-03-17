@@ -63,7 +63,7 @@ boolean lineFollow(){
        analogWrite(E2,PWMspeed);
      }
      
-     delay(50); 
+     delay(75); 
      
   }//end while
 Serial.println("exiting linefollow");

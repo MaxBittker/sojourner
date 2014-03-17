@@ -1,7 +1,7 @@
 //Line Following Code
 #include <Arduino.h>
 #include "constants.h"
-extern int speed;
+
 
 void forward(int speed);
 
@@ -13,23 +13,23 @@ boolean lineFollow(){
 
     if(analogRead(IRpin) < 380){
 
-        forward(speed/2);
-        //digitalWrite(E1,speed/2); //if close, cut speed
+        forward(PWMspeed/2);
+        //digitalWrite(E1,PWMspeed/2); //if close, cut 
         //digitalWrite(E2,speed/2);
     } 
 
  //   digitalWrite(M1, HIGH); //go
   //  digitalWrite(M2, HIGH); 
-     forward(speed);
+     forward(PWMspeed);
     //while side sensors white, forward 
      while(analogRead(right) > RTHRESH && analogRead(left) > LTHRESH && analogRead(middle) && digitalRead(leftbump) == 0 && digitalRead(rightbump)==0) //loop for when happy
      {
      
         if(analogRead(IRpin) < 380)
-        forward(speed/2);
+        forward(PWMspeed/2);
     
         else
-         forward(speed);
+         forward(PWMspeed);
   } //end of the happy loop
 
     // Serial.print("\n");
@@ -51,16 +51,16 @@ boolean lineFollow(){
        
        //turn left wheel back
        digitalWrite(M2, LOW);
-       analogWrite(E2,speed);
-       analogWrite(E1,speed);
+       analogWrite(E2,PWMspeed);
+       analogWrite(E1,PWMspeed);
      }
      
      //same left   
      while(analogRead(left) < LTHRESH)
      {
        digitalWrite(M1, LOW);
-       analogWrite(E1,speed);
-       analogWrite(E2,speed);
+       analogWrite(E1,PWMspeed);
+       analogWrite(E2,PWMspeed);
      }
      
      delay(100); 

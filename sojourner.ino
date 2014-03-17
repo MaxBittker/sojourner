@@ -14,6 +14,7 @@ Servo pan, grip, tilt;
 int lec = 0;
 int rec = 0;
 
+
 location currentPos = centre;
 location destination;
 
@@ -46,63 +47,49 @@ void setup(){
   pinMode(middle, INPUT);
   pinMode(right, INPUT);
   
-  //encoder pin assignment
-  pinMode(le, INPUT);
-  pinMode(re, INPUT);
-  
   //interrupts
-  //attachInterrupt(11, leftEn, RISING);
-  //attachInterrupt(12, rightEn, RISING);
+  attachInterrupt(0, leftEn, RISING);
+  attachInterrupt(1, rightEn, RISING);
   
   //Serial.begin(9600);
   Serial.begin(115200);
   
   waitButton();
+  
+  //spin and find target - or take input  
+
 }
 
 
 void loop(){
   
-  pivot(90);
-  delay(500);
-  pivot(-90);  //NOT WORKING?????!!!!???
-  delay(500);
-//    destination = getLoc();
-//    if(destination == fail)
-//      destination = findLoc();
-//      
-//    if(destination !=fail)
-//      navigate(currentPos, destination);
+    destination = getLoc();
+    if(destination == fail)
+      destination = findLoc();
+    if(destination !=fail)
+    navigate(currentPos, destination);
 
 }//end loop
 
 void pivot(int angle)
 {
+  analogWrite(E1, PWMspeed);
+  analogWrite(E2, PWMspeed); 
+  
   delay(100);
   
-  if (angle > 0) {
-      digitalWrite(M1, LOW);
-      digitalWrite(M2, HIGH);
-  }else if (angle < 0) {
-      digitalWrite(M1, HIGH);
-      digitalWrite(M2, LOW);
+  if (angle > 0)
+  {
+    digitalWrite(M1, LOW);
+    digitalWrite(M2, HIGH);
+  }  
+  else if (angle < 0)
+  {
+    digitalWrite(M1, HIGH);
+    digitalWrite(M2, LOW);
   }
-  
-  lec = 0;
-  rec = 0;
-  
-  float ratio = encCounts/(float)turnAngle;
-  
-  analogWrite(E1, PWMspeed);
-  analogWrite(E2, PWMspeed);
-    
-  while(rec < (int)(abs(angle)*ratio)) {    
-    int re_old = digitalRead(re);
-    while(digitalRead(re) == re_old){}
-    rec++;
-  }
-  
-  forward(0);
+
+  delay(10*abs(angle));
 }
 
 void forward(int speed) {
@@ -132,12 +119,12 @@ void waitButton(){
 
 
 //  --- FUNCTIONS TO INCREMENT ENCODER  ---
-//void leftEn() {
-//  lec++;
-//}
-//
-//void rightEn() {
-//  rec++;
-//}
+void leftEn() {
+  lec++;
+}
+
+void rightEn() {
+  rec++;
+}
 
 

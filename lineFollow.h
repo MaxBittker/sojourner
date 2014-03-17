@@ -12,7 +12,7 @@ boolean lineFollow(){
   while(digitalRead(leftbump) == 1 && digitalRead(rightbump)== 1){
 
     if(analogRead(IRpin) < 380){
-
+        
         forward(PWMspeed/2);
         //digitalWrite(E1,PWMspeed/2); //if close, cut 
         //digitalWrite(E2,speed/2);

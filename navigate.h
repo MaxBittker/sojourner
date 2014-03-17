@@ -13,6 +13,8 @@ boolean navigate(location start, location destination)  {
   if( start == centre) //begins at center
   {
     //TODO logic to spin past a certain number of lines, 
+    Serial.println("navigating from start to " );
+    Serial.print(destination);
     
     switch(destination){
           case zero:

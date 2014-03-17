@@ -9,7 +9,7 @@ void forward(int speed);
 boolean lineFollow(){
   
  
-  while(digitalRead(leftbump) == 0 && digitalRead(rightbump)==0){
+  while(digitalRead(leftbump) == 1 && digitalRead(rightbump)== 1){
 
     if(analogRead(IRpin) < 380){
 
@@ -50,7 +50,7 @@ boolean lineFollow(){
      {
        
        //turn left wheel back
-       digitalWrite(M2, LOW);
+       digitalWrite(M1, LOW);
        analogWrite(E2,PWMspeed);
        analogWrite(E1,PWMspeed);
      }
@@ -58,15 +58,15 @@ boolean lineFollow(){
      //same left   
      while(analogRead(left) < LTHRESH)
      {
-       digitalWrite(M1, LOW);
+       digitalWrite(M2, LOW);
        analogWrite(E1,PWMspeed);
        analogWrite(E2,PWMspeed);
      }
      
-     delay(100); 
+     delay(50); 
      
   }//end while
-
+Serial.println("exiting linefollow");
 } //end line follow
 
 

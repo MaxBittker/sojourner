@@ -9,7 +9,7 @@ location getLoc(){
 	long nowTime = millis();
   
 	location target = fail;
-	int ch = 'x';
+	int ch = '?';
   
 	while((millis() - nowTime) < waitTime && ch == 'x') {  
 		if(Serial.available()) {

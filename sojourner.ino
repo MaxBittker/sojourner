@@ -76,7 +76,7 @@ void pivot(int angle)
   analogWrite(E1, PWMspeed);
   analogWrite(E2, PWMspeed); 
   
-  delay(500);
+  delay(100);
   
   if (angle > 0)
   {

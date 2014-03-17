@@ -23,8 +23,8 @@
 #define right A2
 
 //uncalibrated!
-#define LTHRESH 420
-#define MTHRESH 475
+#define LTHRESH 430
+#define MTHRESH 400
 #define RTHRESH 350
 
 //encoder pins

@@ -14,29 +14,35 @@ boolean navigate(location start, location destination)  {
   {
     //TODO logic to spin past a certain number of lines, 
     Serial.println("navigating from start to " );
-    Serial.print(destination);
+    Serial.print(destination-1);
     
     switch(destination){
           case zero:
-            while(analogRead(right)>RTHRESH)
-                {
-                //spin right while all sensors are white (possibly with speed as a function of time)
-                  analogWrite(E1, PWMspeed/2);
-                  analogWrite(E2, PWMspeed/2); 
+                  analogWrite(E1, PWMspeed);
+                  analogWrite(E2, PWMspeed); 
 
                   digitalWrite(M1, LOW);
                   digitalWrite(M2, HIGH);
+                  
+                  
+                  delay(300); //get off line
+            while(analogRead(right)>RTHRESH)
+                {
+                //spin right while right sensor reads white (possibly with speed as a function of time)
+                delay(5);
  
                 }
+                Serial.println("right saw black" );
                 while(analogRead(middle)>MTHRESH) //while middle sensor reads white
-                  {
-                    analogWrite(E1, PWMspeed/4);
-                    analogWrite(E2, PWMspeed/4); 
+                  { 
+                   delay(15);
 
-                    if(analogRead(left)>LTHRESH){
+                    if(analogRead(left)<LTHRESH){
+                       Serial.println("left saw black,fixing" );
                        digitalWrite(M1, HIGH); //second chance if it misses
                        digitalWrite(M2, LOW);}
                  }
+                   
             //lineFollow();
             approachBall();
             return navigate(destination,bucket);
@@ -48,21 +54,24 @@ boolean navigate(location start, location destination)  {
             break; 
 
           case two:
-             while(analogRead(left)>LTHRESH)
-                {
-                //spin left (possibly with speed as a function of time)
-                    analogWrite(E1, PWMspeed/2);
-                    analogWrite(E2, PWMspeed/2); 
+               analogWrite(E1, PWMspeed);
+                    analogWrite(E2, PWMspeed); 
 
                     digitalWrite(M1, HIGH);
                     digitalWrite(M2, LOW);
-                }
+                delay(300); //get off line  
+             while(analogRead(left)>LTHRESH)
+                {
+                //spin left (possibly with speed as a function of time)
+                 delay(10);
+              }
+              Serial.println("left saw black" );
+              
                 while(analogRead(middle)>MTHRESH)
                   {
-                    analogWrite(E1, PWMspeed/4);
-                    analogWrite(E2, PWMspeed/4); 
-
-                    if(analogRead(right)>RTHRESH){
+                 delay(10);
+                    if(analogRead(right)<RTHRESH){
+                                           Serial.println("right saw black,fixing" );
                        digitalWrite(M1, LOW); //second chance if it misses
                        digitalWrite(M2, HIGH);}
                  }

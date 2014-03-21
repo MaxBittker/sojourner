@@ -3,6 +3,7 @@
 #include <Servo.h>
 extern Servo grip, tilt, pan;
 extern location destination;
+extern nudge direction;
 
 void backward(int speed);
 boolean ObjGrab();

@@ -1,8 +1,7 @@
 sojourner
 =========
 TODO:
-
-pivot calibration
+crossing the dreaded +
 
 ball picking up for read
 

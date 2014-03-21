@@ -32,11 +32,14 @@ boolean approachBall() {
 }
 
 
+//unless sam's changes fix everything, look at using old QUALE search code or similar
 boolean ObjGrab() {
-  tilt.write(TILThoriz);
+  
+  delay(100);
+  tilt.write(TILThoriz); //move as fxn of for loop so slower
   delay(300);
   grip.write(GRIPclose);
-  delay(300);
+  delay(100);
   
   if (analogRead(A5)>100){
     return(true);

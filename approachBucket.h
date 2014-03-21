@@ -11,6 +11,9 @@ boolean approachBucket() {
   
   lineFollow();
   
+  delay(10);
+  tilt.write(TILThoriz);
+  delay(10);  
   grip.write(GRIPopen);
   
   backward(100);

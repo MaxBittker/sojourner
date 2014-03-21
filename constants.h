@@ -22,7 +22,7 @@
 #define middle A1
 #define right A2
 
-//uncalibrated!
+//calibrated to 331 table
 //#define LTHRESH 430
 //#define MTHRESH 400
 //#define RTHRESH 350
@@ -38,3 +38,8 @@
 #define IRpin A4
 
 #define PWMspeed 100  //(40%)  (PWMspeed)
+
+
+//encoder vs. angle
+#define encCounts 11
+#define turnAngle 90

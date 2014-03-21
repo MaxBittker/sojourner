@@ -23,9 +23,12 @@
 #define right A2
 
 //uncalibrated!
-#define LTHRESH 430
+//#define LTHRESH 430
+//#define MTHRESH 400
+//#define RTHRESH 350
+#define LTHRESH 400
 #define MTHRESH 400
-#define RTHRESH 350
+#define RTHRESH 390
 
 //encoder pins
 #define le 11
@@ -35,4 +38,3 @@
 #define IRpin A4
 
 #define PWMspeed 100  //(40%)  (PWMspeed)
-

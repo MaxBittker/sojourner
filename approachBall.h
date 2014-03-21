@@ -32,11 +32,11 @@ boolean approachBall() {
 }
 
 
-//unless sam's changes fix everything, look at using old QUALE search code or similar
+//unless sam's changes fix everything, look at using old QUALE search code or simila
 boolean ObjGrab() {
   
   delay(100);
-  tilt.write(TILThoriz); //move as fxn of for loop so slower
+  tilt.write(TILTgrab); //move as fxn of for loop so slower
   delay(300);
   grip.write(GRIPclose);
   delay(100);

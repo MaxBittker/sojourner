@@ -3,6 +3,8 @@
 #define GRIPclose 200
 #define GRIPopen 80
 #define TILThoriz 70
+#define TILTgrab 75
+#define TILTdrop 110
 #define TILTup 160
 #define PANcentre 90
 #define PANleft 30

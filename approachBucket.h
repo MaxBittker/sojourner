@@ -11,13 +11,15 @@ boolean approachBucket() {
   
   lineFollow();
   
+  //something so that it has time to take nudge functions
+  
   delay(10);
-  tilt.write(TILThoriz);
+  tilt.write(TILTdrop);
   delay(10);  
   grip.write(GRIPopen);
   
-  backward(100);
-  delay(100);
+  backward(PWMspeed);
+  delay(600);
   backward(0);
     
   return (true);

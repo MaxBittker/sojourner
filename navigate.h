@@ -6,6 +6,7 @@ void pivot(int angle);
 void forward(int speed);
 
 boolean braveForray(int expectedDirection);
+void Across(long wait, long gaptime);
 boolean approachBucket();
 
 boolean navigate(location start, location destination)  {
@@ -44,10 +45,12 @@ boolean navigate(location start, location destination)  {
         }
       }
 
+      //lineFollow();
       approachBall();
       return navigate(destination,bucket);
       break;
     case one:
+      // lineFollow();
       approachBall();
       return navigate(destination, bucket);
       break; 
@@ -75,6 +78,7 @@ boolean navigate(location start, location destination)  {
           digitalWrite(M2, HIGH);
         }
       }
+      //lineFollow();
       approachBall();
       return navigate(destination,bucket);
       break;
@@ -103,12 +107,15 @@ boolean navigate(location start, location destination)  {
       case zero:
         pivot(-140);
         braveForray(0); //angle right
+        // lineFollow();
         approachBall();
         return navigate(destination,bucket);
         break;
       case one:
 
         pivot(180);
+        Across(14001400,1000);
+        // lineFollow();
         approachBall();
         return navigate(destination, bucket);
         break; 
@@ -116,6 +123,7 @@ boolean navigate(location start, location destination)  {
       case two:
         pivot(140);
         braveForray(1); //angle left
+        // lineFollow();
         approachBall();
 
         return navigate(destination,bucket);
@@ -142,6 +150,7 @@ boolean navigate(location start, location destination)  {
 
         pivot(-140);
         braveForray(0); //angle right
+        //lineFollow();
 
         return approachBucket();
 
@@ -149,7 +158,9 @@ boolean navigate(location start, location destination)  {
       case one:    //across from bucket
 
         pivot(180);
-       
+        Across(1400,1000);
+        // lineFollow();
+
         return approachBucket();
         break;
 
@@ -237,3 +248,40 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
 
 }
 
+void Across(long wait, long gaptime){
+ long timestart = millis();
+  while(millis() < timestart + wait){
+		forward(PWMspeed);
+		 
+		//while side sensors white, forward - happy loop
+		while(analogRead(right) > RTHRESH && analogRead(left) > LTHRESH) 
+		{
+			delay(10);
+		
+		} //end of the happy loop
+		 
+		  //if right black, turn until white then a fudge factor more
+		 while(analogRead(right) < RTHRESH)
+		 {
+		   //turn left wheel back
+		   digitalWrite(M1, LOW);
+		   analogWrite(E2,PWMspeed);
+		   analogWrite(E1,PWMspeed);
+		 }
+		 
+		 //same left   
+		 while(analogRead(left) < LTHRESH)
+		 {
+		   digitalWrite(M2, LOW);
+		   analogWrite(E1,PWMspeed);
+		   analogWrite(E2,PWMspeed);
+		 }
+		 
+		 delay(10); 
+		 
+	}//end while true
+	Serial.println("starting Gap");
+      delay(gaptime);
+	Serial.println("exiting Across");
+
+}

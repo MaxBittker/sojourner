@@ -20,7 +20,7 @@ boolean approachBucket() {
   
   backward(PWMspeed);
   delay(600);
-  backward(0);
+  forward(0);
     
   return (true);
   

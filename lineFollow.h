@@ -50,7 +50,7 @@ boolean lineFollow(){
 		   analogWrite(E2,PWMspeed);
 		 }
 		 
-		 delay(40); 
+		 delay(10); 
 		 
 	}//end while true
 

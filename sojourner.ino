@@ -65,15 +65,11 @@ void loop(){
       destination = findLoc(); //give up and find it yourself 
     if(destination !=fail)
       navigate(currentPos, destination); // go there
-     
-    pivot(90);
-    delay(500);
-    pivot(-90);  //NOT WORKING?????!!!!???
-    delay(500);
-
 
 }//end loop
 
+
+//seems to slightly overroatet positively, and possibly under negatively
 void pivot(int angle)
 {
   delay(100);

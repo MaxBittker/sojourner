@@ -14,7 +14,7 @@ boolean approachBall() {
   
   lineFollow();
   
-  boolean ball = true;//ObjGrab();
+  boolean ball = ObjGrab();
    
   if (ball == true) {
     destination = bucket;

@@ -44,12 +44,10 @@ boolean navigate(location start, location destination)  {
         }
       }
 
-      //lineFollow();
       approachBall();
       return navigate(destination,bucket);
       break;
     case one:
-      // lineFollow();
       approachBall();
       return navigate(destination, bucket);
       break; 
@@ -77,7 +75,6 @@ boolean navigate(location start, location destination)  {
           digitalWrite(M2, HIGH);
         }
       }
-      //lineFollow();
       approachBall();
       return navigate(destination,bucket);
       break;
@@ -106,14 +103,12 @@ boolean navigate(location start, location destination)  {
       case zero:
         pivot(-140);
         braveForray(0); //angle right
-        // lineFollow();
         approachBall();
         return navigate(destination,bucket);
         break;
       case one:
 
         pivot(180);
-        // lineFollow();
         approachBall();
         return navigate(destination, bucket);
         break; 
@@ -121,7 +116,6 @@ boolean navigate(location start, location destination)  {
       case two:
         pivot(140);
         braveForray(1); //angle left
-        // lineFollow();
         approachBall();
 
         return navigate(destination,bucket);
@@ -148,7 +142,6 @@ boolean navigate(location start, location destination)  {
 
         pivot(-140);
         braveForray(0); //angle right
-        //lineFollow();
 
         return approachBucket();
 
@@ -156,8 +149,7 @@ boolean navigate(location start, location destination)  {
       case one:    //across from bucket
 
         pivot(180);
-        // lineFollow();
-
+       
         return approachBucket();
         break;
 

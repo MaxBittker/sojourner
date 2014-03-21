@@ -46,7 +46,7 @@ void setup(){
   pinMode(left, INPUT);
   pinMode(middle, INPUT);
   pinMode(right, INPUT);
-  
+  pinMode(IRpin, INPUT);
   //interrupts
   attachInterrupt(0, leftEn, RISING);
   attachInterrupt(1, rightEn, RISING);
@@ -63,11 +63,12 @@ void setup(){
 
 void loop(){
   
-    destination = getLoc();
+    destination = getLoc();  //get loc from BT
     if(destination == fail)
-      destination = findLoc();
+      destination = findLoc(); //give up and find it yourself 
     if(destination !=fail)
-    navigate(currentPos, destination);
+    navigate(currentPos, destination); // go there
+    
 
 }//end loop
 
@@ -126,5 +127,4 @@ void leftEn() {
 void rightEn() {
   rec++;
 }
-
 

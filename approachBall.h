@@ -2,9 +2,11 @@
 
 #include <Servo.h>
 extern Servo grip, tilt, pan;
-extern location destination;
+#include "constants.h"
 
 void backward(int speed);
+void forward(int speed);
+
 boolean ObjGrab();
 
 boolean approachBall() {
@@ -13,13 +15,13 @@ boolean approachBall() {
   tilt.write(TILTup);
   
   lineFollow();
-  
+  Serial.println("trying to grab");
   boolean ball = ObjGrab();
-   
+   Serial.println("grabbedball");
   if (ball == true) {
-    destination = bucket;
+
     backward(100);
-     Serial.println("backing up" );
+    // Serial.println("backing up" );
     delay(50);
     forward(0);
     return (true) ;

@@ -7,9 +7,10 @@ void forward(int speed);
 
 boolean braveForray(int expectedDirection);
 void Across(long wait, long gaptime);
+void oneeighty();
 boolean approachBucket();
 
-boolean navigate(location start, location destination)  {
+location navigate(location start, location destination)  {
 
   if( start == centre) //begins at center
   {
@@ -19,8 +20,8 @@ boolean navigate(location start, location destination)  {
 
     switch(destination){
     case zero:
-      analogWrite(E1, PWMspeed);
-      analogWrite(E2, PWMspeed); 
+      analogWrite(E1, PWMspeed*.7);
+      analogWrite(E2, PWMspeed*.7); 
 
       digitalWrite(M1, LOW);
       digitalWrite(M2, HIGH);
@@ -33,7 +34,7 @@ boolean navigate(location start, location destination)  {
         delay(5);
 
       }
-      Serial.println("right saw black" );
+      //Serial.println("right saw black" );
       while(analogRead(middle)>MTHRESH) //while middle sensor reads white
       { 
         delay(15);
@@ -56,8 +57,8 @@ boolean navigate(location start, location destination)  {
       break; 
 
     case two:
-      analogWrite(E1, PWMspeed);
-      analogWrite(E2, PWMspeed); 
+      analogWrite(E1, PWMspeed*.7);
+      analogWrite(E2, PWMspeed*.7); 
 
       digitalWrite(M1, HIGH);
       digitalWrite(M2, LOW);
@@ -67,7 +68,7 @@ boolean navigate(location start, location destination)  {
         //spin left (possibly with speed as a function of time)
         delay(10);
       }
-      Serial.println("left saw black" );
+      //Serial.println("left saw black" );
 
       while(analogRead(middle)>MTHRESH)
       {
@@ -84,8 +85,8 @@ boolean navigate(location start, location destination)  {
       break;
 
     default:
-      //error
-      return false;
+ Serial.println("fail" );
+ return fail;
       break;
 
     }
@@ -95,7 +96,7 @@ boolean navigate(location start, location destination)  {
 
     navigate(destination,bucket); //always goes to bucket after it gets the ball
 
-    return true; //returns to main after 
+    return bucket; //returns to main after 
 
   }
 
@@ -105,23 +106,27 @@ boolean navigate(location start, location destination)  {
     {
       switch(destination){
       case zero:
-        pivot(-140);
+        Serial.println("navigating to zero");
+        forward(0);
+        pivot(-160);
+       delay(500); //maybe this will fix it???
         braveForray(0); //angle right
         // lineFollow();
         approachBall();
         return navigate(destination,bucket);
         break;
       case one:
-
-        pivot(180);
-        Across(14001400,1000);
+                      Serial.println("navigating to one");
+        oneeighty();
+        Across(1000,1000);
         // lineFollow();
         approachBall();
         return navigate(destination, bucket);
         break; 
 
       case two:
-        pivot(140);
+                Serial.println("navigating to two");
+        pivot(160);
         braveForray(1); //angle left
         // lineFollow();
         approachBall();
@@ -131,7 +136,7 @@ boolean navigate(location start, location destination)  {
 
       default:
         //error
-        return false;
+        return fail;
         break;
       }
     }
@@ -140,33 +145,35 @@ boolean navigate(location start, location destination)  {
 
       switch (start) {
       case zero: //bucket is to the right
-        pivot(140);
+        pivot(160);
         braveForray(1); //(angle left);
         // lineFollow();
-        return approachBucket();
+         approachBucket();
+         return bucket;
 
         break;
       case two:    //bucket is to the left
 
-        pivot(-140);
+        pivot(-160);
         braveForray(0); //angle right
         //lineFollow();
 
-        return approachBucket();
+         approachBucket();
+         return bucket;
 
         break;
       case one:    //across from bucket
 
-        pivot(180);
-        Across(1400,1000);
+        oneeighty();
+        Across(1000,1000);
         // lineFollow();
-
-        return approachBucket();
+approachBucket();
+        return bucket;
         break;
 
       default:
         //error
-        return false;
+        return fail;
         break;
 
       }
@@ -188,7 +195,7 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
       while(analogRead(right)>RTHRESH)
         delay(10); //wait for right sensor
 
-      delay(150); // then overshoot
+      delay(160); // then overshoot
         //turn right
 
       analogWrite(E1, PWMspeed);
@@ -217,7 +224,7 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
       while(analogRead(left)>LTHRESH)
         delay(10);
         
-      delay(150); // then overshoot
+      delay(160); // then overshoot
         //turn left
 
       analogWrite(E1, PWMspeed);
@@ -250,7 +257,7 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
 
 void Across(long wait, long gaptime){
  long timestart = millis();
-  while(millis() < timestart + wait){
+  while(millis() < timestart + wait){ 
 		forward(PWMspeed);
 		 
 		//while side sensors white, forward - happy loop
@@ -281,7 +288,39 @@ void Across(long wait, long gaptime){
 		 
 	}//end while true
 	Serial.println("starting Gap");
-      delay(gaptime);
+
+     
+ while(millis() < timestart + wait +gaptime){ 
+if(  analogRead(right) < RTHRESH && analogRead(left) < LTHRESH &&   analogRead(middle) < MTHRESH)
+   delay(600);
+    break;
+}
+
 	Serial.println("exiting Across");
 
+}
+void oneeighty( ){
+
+ analogWrite(E1, PWMspeed*.7);
+      analogWrite(E2, PWMspeed*.7); 
+
+      digitalWrite(M1, HIGH);
+      digitalWrite(M2, LOW);
+      delay(550); //get off line  
+      while(analogRead(left)>LTHRESH)
+      {
+        //spin left (possibly with speed as a function of time)
+        delay(10);
+      }
+      Serial.println("left saw black" );
+
+      while(analogRead(middle)>MTHRESH)
+      {
+        delay(10);
+        if(analogRead(right)<RTHRESH){
+          Serial.println("right saw black,fixing" );
+          digitalWrite(M1, LOW); //second chance if it misses
+          digitalWrite(M2, HIGH);
+        }
+      }
 }

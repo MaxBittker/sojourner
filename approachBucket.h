@@ -2,9 +2,8 @@
 
 #include <Servo.h>
 extern Servo grip, tilt, pan;
-
 void backward(int speed);
-
+void forward(int speed);
 boolean approachBucket() {
   
   tilt.write(TILTup);
@@ -19,7 +18,7 @@ boolean approachBucket() {
   grip.write(GRIPopen);
   
   backward(PWMspeed);
-  delay(600);
+  delay(300);
   forward(0);
     
   return (true);

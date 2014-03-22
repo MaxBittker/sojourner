@@ -1,12 +1,12 @@
 
 //servo saved positions
-#define GRIPclose 200
+#define GRIPclose 115
 #define GRIPopen 80
 #define TILThoriz 70
 #define TILTgrab 75
 #define TILTdrop 110
 #define TILTup 160
-#define PANcentre 90
+#define PANcentre 100
 #define PANleft 30
 
 //set motor pin values
@@ -39,7 +39,7 @@
 //IR setup
 #define IRpin A4
 
-#define PWMspeed 100  //(40%)  (PWMspeed)
+#define PWMspeed 160  //(40%)  (PWMspeed)
 
 
 //encoder vs. angle

@@ -52,7 +52,7 @@ void setup(){
   
   //Serial.begin(9600);
   Serial.begin(115200);
-  
+ //grip.write(GRIPclose);
   waitButton();
 
 }
@@ -64,7 +64,7 @@ void loop(){
     if(destination == fail)
       destination = findLoc(); //give up and find it yourself 
     if(destination !=fail)
-      navigate(currentPos, destination); // go there
+     currentPos=  navigate(currentPos, destination); // go there
 
 }//end loop
 
@@ -72,6 +72,7 @@ void loop(){
 //seems to slightly overroatet positively, and possibly under negatively
 void pivot(int angle)
 {
+   
   delay(100);
   
   if (angle > 0)
@@ -88,8 +89,9 @@ void pivot(int angle)
   
   float ratio = encCounts/(float)turnAngle;
   
-  analogWrite(E1, PWMspeed);
-  analogWrite(E2, PWMspeed);
+  
+  analogWrite(E1, PWMspeed*.7);
+  analogWrite(E2, PWMspeed*.7);
     
   while(rec < (int)(abs(angle)*ratio)) {    
       int re_old = digitalRead(re);

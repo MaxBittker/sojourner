@@ -1,4 +1,4 @@
-enum location{bucket, zero, one, two, centre, fail}; //counts ccw from bucket  
+typedef enum {bucket, zero, one, two, centre, fail}location; //counts ccw from 0  
 
 #include <Arduino.h>
 

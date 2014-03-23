@@ -189,11 +189,11 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
        while(analogRead(right)>RTHRESH)
         delay(10); //wait for right sensor
 
-      delay(100); // then overshoot
+      delay(200); // then overshoot
         //turn right
 
-      analogWrite(E1, PWMspeed*6);
-      analogWrite(E2, PWMspeed*6); 
+      analogWrite(E1, PWMspeed*.6);
+      analogWrite(E2, PWMspeed*.6); 
 
       digitalWrite(M1, LOW);
       digitalWrite(M2, HIGH);
@@ -218,11 +218,11 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
       while(analogRead(left)>LTHRESH)
         delay(10);
         
-      delay(100); // then overshoot
+      delay(200); // then overshoot
         //turn left
 
-      analogWrite(E1, PWMspeed*6);
-      analogWrite(E2, PWMspeed*6); 
+      analogWrite(E1, PWMspeed*.6);
+      analogWrite(E2, PWMspeed*.6); 
 
       digitalWrite(M1, HIGH);
       digitalWrite(M2, LOW);

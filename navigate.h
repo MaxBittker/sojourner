@@ -186,6 +186,7 @@ approachBucket();
 
 boolean braveForray(int expectedDirection){ //0=right 1=left
   forward(PWMspeed);
+ 
 
   while(analogRead(left)>LTHRESH && analogRead(middle)>MTHRESH && analogRead(right)>RTHRESH){ //all white
     delay(10); //possibly reduce speed as a fn of time!
@@ -198,8 +199,8 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
       delay(160); // then overshoot
         //turn right
 
-      analogWrite(E1, PWMspeed);
-      analogWrite(E2, PWMspeed); 
+      analogWrite(E1, PWMspeed*.7);
+      analogWrite(E2, PWMspeed*.7); 
 
       digitalWrite(M1, LOW);
       digitalWrite(M2, HIGH);
@@ -227,8 +228,8 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
       delay(160); // then overshoot
         //turn left
 
-      analogWrite(E1, PWMspeed);
-      analogWrite(E2, PWMspeed); 
+      analogWrite(E1, PWMspeed*.7);
+      analogWrite(E2, PWMspeed*.7); 
 
       digitalWrite(M1, HIGH);
       digitalWrite(M2, LOW);
@@ -247,7 +248,7 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
         
         
     }
-    delay(100); // fudge 
+   // delay(15); // fudge 
     forward(0);
 
     return(true);
@@ -303,12 +304,12 @@ if(  analogRead(right) < RTHRESH && analogRead(left) < LTHRESH &&   analogRead(m
 }
 void oneeighty( ){
 
- analogWrite(E1, PWMspeed*.7);
-      analogWrite(E2, PWMspeed*.7); 
+      analogWrite(E1, PWMspeed*.6);
+      analogWrite(E2, PWMspeed*.6); 
 
       digitalWrite(M1, HIGH);
       digitalWrite(M2, LOW);
-      delay(550); //get off line  
+      delay(350); //get off line  
       while(analogRead(left)>LTHRESH)
       {
         //spin left (possibly with speed as a function of time)
@@ -316,13 +317,14 @@ void oneeighty( ){
       }
       Serial.println("left saw black" );
 
-      while(analogRead(middle)>MTHRESH)
+      while(analogRead(middle)>MTHRESH) //middle reads white
       {
-        delay(10);
+        delay(5);
         if(analogRead(right)<RTHRESH){
-          Serial.println("right saw black,fixing" );
+          Serial.println("right saw black during 180,fixing" );
           digitalWrite(M1, LOW); //second chance if it misses
           digitalWrite(M2, HIGH);
         }
       }
 }
+

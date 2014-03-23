@@ -118,7 +118,7 @@ location navigate(location start, location destination)  {
       case one:
                       Serial.println("navigating to one");
         oneeighty();
-        Across(1000,1000);
+        Across(1200,1000);
         // lineFollow();
         approachBall();
         return navigate(destination, bucket);
@@ -247,6 +247,7 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
         
         
     }
+    delay(100); // fudge 
     forward(0);
 
     return(true);
@@ -268,21 +269,22 @@ void Across(long wait, long gaptime){
 		} //end of the happy loop
 		 
 		  //if right black, turn until white then a fudge factor more
-		 while(analogRead(right) < RTHRESH)
+		  while(analogRead(right) < RTHRESH)
 		 {
 		   //turn left wheel back
-		   digitalWrite(M1, LOW);
-		   analogWrite(E2,PWMspeed);
-		   analogWrite(E1,PWMspeed);
+		   //digitalWrite(M1, LOW);
+		   analogWrite(E2,120);
+		   analogWrite(E1,100);
 		 }
 		 
 		 //same left   
 		 while(analogRead(left) < LTHRESH)
 		 {
 		   digitalWrite(M2, LOW);
-		   analogWrite(E1,PWMspeed);
-		   analogWrite(E2,PWMspeed);
+		   analogWrite(E1,100);
+		   analogWrite(E2,120);
 		 }
+
 		 
 		 delay(10); 
 		 

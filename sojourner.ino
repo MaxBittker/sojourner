@@ -15,7 +15,7 @@ int lec = 0;
 int rec = 0;
 
 location currentPos = centre;
-location destination;
+location mainDest;
 
 void setup(){
   
@@ -60,11 +60,11 @@ void setup(){
 
 void loop(){
   
-    destination = getLoc();  //get loc from BT
-    if(destination == fail)
-      destination = findLoc(); //give up and find it yourself 
-    if(destination !=fail)
-     currentPos=  navigate(currentPos, destination); // go there
+    mainDest = getLoc();  //get loc from BT
+    //if(destination == fail)
+      //destination = findLoc(); //give up and find it yourself 
+    if(mainDest !=fail)
+     currentPos = navigate(currentPos, mainDest); // go there
 
 }//end loop
 
@@ -125,8 +125,6 @@ void waitButton(){
   while(!(digitalRead(leftbump)))
   {}
 }
-
-
 
 
 //  --- FUNCTIONS TO INCREMENT ENCODER  ---

@@ -8,6 +8,7 @@ void backward(int speed);
 void forward(int speed);
 
 boolean ObjGrab();
+extern void waitButton();
 
 boolean approachBall() {
   Serial.println("approaching ball" );
@@ -18,6 +19,7 @@ boolean approachBall() {
   Serial.println("trying to grab");
   boolean ball = ObjGrab();
    Serial.println("grabbedball");
+   
   if (ball == true) {
 
     backward(100);
@@ -27,14 +29,17 @@ boolean approachBall() {
     return (true) ;
   }
   
-  if (ball == false)
-    forward(0); //stop
-    //enter shuffle functions
-  
+  //stop, wait for button press - so that can be returned to start
+  if (ball == false){
+    Serial.println("no ball");
+    forward(0);
+    waitButton();
+    loop();
+    //goto missedball;  
+  }
 }
 
 
-//unless sam's changes fix everything, look at using old QUALE search code or simila
 boolean ObjGrab() {
   
   delay(100);
@@ -51,4 +56,5 @@ boolean ObjGrab() {
   }
  
 }
+
 

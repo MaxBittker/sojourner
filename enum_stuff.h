@@ -33,14 +33,14 @@ location getLoc(){
   
 }
 
-//doesn't need to be written yet b/c only used if bluetooth fails
-location findLoc(){
-  
-  location target = fail;
-  
-  //drives forward and turns until it finds the blinking target
-  
-  return target;
-  
-}
+////doesn't need to be written yet b/c only used if bluetooth fails
+//location findLoc(){
+//  
+//  location target = fail;
+//  
+//  //drives forward and turns until it finds the blinking target
+//  
+//  return target;
+//  
+//}
 

@@ -10,7 +10,7 @@ void Across(long wait, long gaptime);
 void oneeighty();
 boolean approachBucket();
 
-extern location mainDest;
+extern void waitButton();
 
 location navigate(location start, location destination)  {
 
@@ -27,7 +27,6 @@ location navigate(location start, location destination)  {
 
       digitalWrite(M1, LOW);
       digitalWrite(M2, HIGH);
-
 
       delay(300); //get off line
       while(analogRead(right)>RTHRESH)
@@ -48,7 +47,14 @@ location navigate(location start, location destination)  {
         }
       }
       approachBall();
-      return navigate(destination,bucket);
+      return navigate(destination, bucket);
+//      //if miss the ball - put for other cases too
+//      if (approachBall())
+//           return navigate(destination,bucket);
+//      else {
+//          waitButton();
+//          return centre;
+//      }
       break;
     case one:
       approachBall();

@@ -9,7 +9,8 @@ boolean braveForray(int expectedDirection);
 void Across(long wait, long gaptime);
 void oneeighty();
 boolean approachBucket();
-extern void waitButton();
+
+extern location mainDest;
 
 location navigate(location start, location destination)  {
 
@@ -46,12 +47,8 @@ location navigate(location start, location destination)  {
           digitalWrite(M2, LOW);
         }
       }
-      //if miss the ball
-      if (approachBall())
-          return navigate(destination,bucket);
-      else 
-          waitButton();
-          return centre;
+      approachBall();
+      return navigate(destination,bucket);
       break;
     case one:
       approachBall();
@@ -179,9 +176,11 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
   while(analogRead(left)>LTHRESH && analogRead(middle)>MTHRESH && analogRead(right)>RTHRESH){ //all white
     delay(10); //possibly reduce speed as a fn of time!
     forward(PWMspeed);
-    if(expectedDirection == 0){ //expecting to turn right
+      
 
-      while(analogRead(right)>RTHRESH)
+      if(expectedDirection == 0){ //expecting to turn right
+
+       while(analogRead(right)>RTHRESH)
         delay(10); //wait for right sensor
 
       delay(100); // then overshoot
@@ -195,15 +194,15 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
 
 
       while(analogRead(middle)>MTHRESH) //while middle sensor reads white
-      { 
-        delay(5);
+        { 
+          delay(5);
 
-        if(analogRead(left)<LTHRESH){
-          Serial.println("left saw black,fixing" );
-          digitalWrite(M1, HIGH); //second chance if it misses
-          digitalWrite(M2, LOW);
-        }
-      }
+         if(analogRead(left)<LTHRESH){
+            Serial.println("left saw black,fixing" );
+            digitalWrite(M1, HIGH); //second chance if it misses
+            digitalWrite(M2, LOW);
+          }
+       }
 
     }
 
@@ -213,7 +212,7 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
       while(analogRead(left)>LTHRESH)
         delay(10);
         
-      delay(160); // then overshoot
+      delay(100); // then overshoot
         //turn left
 
       analogWrite(E1, PWMspeed*6);
@@ -237,14 +236,14 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
         
     }
  
-    forward(0);
-  delay(500); // sit still 
-    return(true);
+    
 
   }
      forward(0);
-	 delay(200);
+	 delay(500);
+   return(true);
 }
+
 
 void Across(long wait, long gaptime){
  long timestart = millis();

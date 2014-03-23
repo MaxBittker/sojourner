@@ -35,9 +35,7 @@ boolean approachBall() {
   if (ball == false){
     Serial.println("no ball");
     forward(0);
-    waitButton();
-    loop();
-    //goto missedball;  
+    return(false);
   }
 }
 

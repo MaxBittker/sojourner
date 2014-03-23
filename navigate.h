@@ -198,11 +198,11 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
       while(analogRead(right)>RTHRESH)
         delay(10); //wait for right sensor
 
-      delay(160); // then overshoot
+      delay(100); // then overshoot
         //turn right
 
-      analogWrite(E1, PWMspeed);
-      analogWrite(E2, PWMspeed); 
+      analogWrite(E1, PWMspeed*6);
+      analogWrite(E2, PWMspeed*6); 
 
       digitalWrite(M1, LOW);
       digitalWrite(M2, HIGH);
@@ -230,8 +230,8 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
       delay(160); // then overshoot
         //turn left
 
-      analogWrite(E1, PWMspeed);
-      analogWrite(E2, PWMspeed); 
+      analogWrite(E1, PWMspeed*6);
+      analogWrite(E2, PWMspeed*6); 
 
       digitalWrite(M1, HIGH);
       digitalWrite(M2, LOW);
@@ -250,13 +250,14 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
         
         
     }
-    delay(100); // fudge 
+ 
     forward(0);
-
+  delay(500); // sit still 
     return(true);
 
   }
-
+     forward(0);
+	 delay(200);
 }
 
 void Across(long wait, long gaptime){
@@ -297,7 +298,7 @@ void Across(long wait, long gaptime){
      
  while(millis() < timestart + wait +gaptime){ 
 if(  analogRead(right) < RTHRESH && analogRead(left) < LTHRESH &&   analogRead(middle) < MTHRESH)
-   delay(600);
+   delay(400);
     break;
 }
 
@@ -306,8 +307,8 @@ if(  analogRead(right) < RTHRESH && analogRead(left) < LTHRESH &&   analogRead(m
 }
 void oneeighty( ){
 
- analogWrite(E1, PWMspeed*.7);
-      analogWrite(E2, PWMspeed*.7); 
+ analogWrite(E1, PWMspeed*.6);
+      analogWrite(E2, PWMspeed*.6); 
 
       digitalWrite(M1, HIGH);
       digitalWrite(M2, LOW);
@@ -328,4 +329,7 @@ void oneeighty( ){
           digitalWrite(M2, HIGH);
         }
       }
+            forward(0);
+	      delay(200);
+
 }

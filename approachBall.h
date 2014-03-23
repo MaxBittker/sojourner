@@ -18,6 +18,8 @@ boolean approachBall() {
   lineFollow();
   Serial.println("trying to grab");
   boolean ball = ObjGrab();
+  
+  ball = true;
    Serial.println("grabbedball");
    
   if (ball == true) {

@@ -47,14 +47,10 @@ location navigate(location start, location destination)  {
           digitalWrite(M2, LOW);
         }
       }
-
-      //lineFollow();
-      mainDest = destination;
       approachBall();
       return navigate(destination,bucket);
       break;
     case one:
-      // lineFollow();
       approachBall();
       return navigate(destination, bucket);
       break; 
@@ -82,14 +78,13 @@ location navigate(location start, location destination)  {
           digitalWrite(M2, HIGH);
         }
       }
-      //lineFollow();
       approachBall();
       return navigate(destination,bucket);
       break;
 
     default:
- Serial.println("fail" );
- return fail;
+       Serial.println("fail" );
+       return fail;
       break;
 
     }
@@ -114,24 +109,21 @@ location navigate(location start, location destination)  {
         pivot(-160);
        delay(500); //maybe this will fix it???
         braveForray(0); //angle right
-        // lineFollow();
         approachBall();
         return navigate(destination,bucket);
         break;
       case one:
-                      Serial.println("navigating to one");
+        Serial.println("navigating to one");
         oneeighty();
         Across(1200,1000);
-        // lineFollow();
         approachBall();
         return navigate(destination, bucket);
         break; 
 
       case two:
-                Serial.println("navigating to two");
+        Serial.println("navigating to two");
         pivot(160);
         braveForray(1); //angle left
-        // lineFollow();
         approachBall();
 
         return navigate(destination,bucket);
@@ -150,30 +142,21 @@ location navigate(location start, location destination)  {
       case zero: //bucket is to the right
         pivot(160);
         braveForray(1); //(angle left);
-        // lineFollow();
-         approachBucket();
-         return bucket;
-
-        break;
-      case two:    //bucket is to the left
-
-        pivot(-160);
-        braveForray(0); //angle right
-        //lineFollow();
-
-         approachBucket();
-         return bucket;
-
-        break;
-      case one:    //across from bucket
-
-        oneeighty();
-        Across(1000,1000);
-        // lineFollow();
-approachBucket();
+        approachBucket();
         return bucket;
         break;
-
+      case two:    //bucket is to the left
+        pivot(-160);
+        braveForray(0); //angle right
+        approachBucket();
+        return bucket;
+        break;
+      case one:    //across from bucket
+        oneeighty();
+        Across(1000,1000);
+        approachBucket();
+        return bucket;
+        break;
       default:
         //error
         return fail;
@@ -184,7 +167,7 @@ approachBucket();
     }
 
   }
-}  //end nav probably
+}  //end nav
 
 
 boolean braveForray(int expectedDirection){ //0=right 1=left

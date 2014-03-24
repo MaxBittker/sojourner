@@ -27,7 +27,7 @@ location getLoc(){
 				break;
 		case '2': target = two;
 				break;
-                case 'c': target = restart;
+                case 'C': target = restart;
                                  break;
 	} 
 

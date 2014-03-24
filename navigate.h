@@ -267,7 +267,7 @@ void Across(long wait, long gaptime){
 		 {
 		   //turn left wheel back
 		   //digitalWrite(M1, LOW);
-		   analogWrite(E2,120);
+		   analogWrite(E2,140);
 		   analogWrite(E1,100);
 		 }
 		 
@@ -276,7 +276,7 @@ void Across(long wait, long gaptime){
 		 {
 		   digitalWrite(M2, LOW);
 		   analogWrite(E1,100);
-		   analogWrite(E2,120);
+		   analogWrite(E2,140);
 		 }
 
 		 

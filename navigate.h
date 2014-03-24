@@ -22,8 +22,8 @@ location navigate(location start, location destination)  {
 
     switch(destination){
     case zero:
-      analogWrite(E1, PWMspeed*.7);
-      analogWrite(E2, PWMspeed*.7); 
+      analogWrite(E1, PWMspeed*.6);
+      analogWrite(E2, PWMspeed*.6); 
 
       digitalWrite(M1, LOW);
       digitalWrite(M2, HIGH);
@@ -38,7 +38,7 @@ location navigate(location start, location destination)  {
       //Serial.println("right saw black" );
       while(analogRead(middle)>MTHRESH) //while middle sensor reads white
       { 
-        delay(15);
+        delay(10);
 
         if(analogRead(left)<LTHRESH){
           Serial.println("left saw black,fixing" );
@@ -46,6 +46,8 @@ location navigate(location start, location destination)  {
           digitalWrite(M2, LOW);
         }
       }
+       forward(0);
+      delay(100);
       approachBall();
       return navigate(destination, bucket);
 //      //if miss the ball - put for other cases too
@@ -62,8 +64,8 @@ location navigate(location start, location destination)  {
       break; 
 
     case two:
-      analogWrite(E1, PWMspeed*.7);
-      analogWrite(E2, PWMspeed*.7); 
+      analogWrite(E1, PWMspeed*.6);
+      analogWrite(E2, PWMspeed*.6); 
 
       digitalWrite(M1, HIGH);
       digitalWrite(M2, LOW);
@@ -71,19 +73,21 @@ location navigate(location start, location destination)  {
       while(analogRead(left)>LTHRESH)
       {
         //spin left (possibly with speed as a function of time)
-        delay(10);
+        delay(5);
       }
       //Serial.println("left saw black" );
 
       while(analogRead(middle)>MTHRESH)
       {
-        delay(10);
+        delay(5);
         if(analogRead(right)<RTHRESH){
           Serial.println("right saw black,fixing" );
           digitalWrite(M1, LOW); //second chance if it misses
           digitalWrite(M2, HIGH);
         }
       }
+      forward(0);
+      delay(100);
       approachBall();
       return navigate(destination,bucket);
       break;
@@ -112,8 +116,8 @@ location navigate(location start, location destination)  {
       case zero:
         Serial.println("navigating to zero");
         forward(0);
-        pivot(-160);
-       delay(500); //maybe this will fix it???
+        pivot(-165);
+       delay(300); //maybe this will fix it???
         braveForray(0); //angle right
         approachBall();
         return navigate(destination,bucket);
@@ -128,7 +132,9 @@ location navigate(location start, location destination)  {
 
       case two:
         Serial.println("navigating to two");
-        pivot(160);
+        forward(0);
+        pivot(150);
+        delay(300);
         braveForray(1); //angle left
         approachBall();
 
@@ -152,7 +158,7 @@ location navigate(location start, location destination)  {
         return bucket;
         break;
       case two:    //bucket is to the left
-        pivot(-160);
+        pivot(-150);
         braveForray(0); //angle right
         approachBucket();
         return bucket;
@@ -246,7 +252,7 @@ boolean braveForray(int expectedDirection){ //0=right 1=left
 
   }
      forward(0);
-	 delay(500);
+	 delay(200);
    return(true);
 }
 

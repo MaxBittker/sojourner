@@ -304,22 +304,22 @@ if(  analogRead(right) < RTHRESH && analogRead(left) < LTHRESH &&   analogRead(m
 }
 void oneeighty( ){
 
- analogWrite(E1, PWMspeed*.6);
-      analogWrite(E2, PWMspeed*.6); 
+ analogWrite(E1, PWMspeed*.65);
+      analogWrite(E2, PWMspeed*.65); 
 
       digitalWrite(M1, HIGH);
       digitalWrite(M2, LOW);
-      delay(550); //get off line  
+      delay(450); //get off line  
       while(analogRead(left)>LTHRESH)
       {
         //spin left (possibly with speed as a function of time)
-        delay(10);
+        delay(5);
       }
       Serial.println("left saw black" );
 
       while(analogRead(middle)>MTHRESH)
       {
-        delay(10);
+        delay(5);
         if(analogRead(right)<RTHRESH){
           Serial.println("right saw black,fixing" );
           digitalWrite(M1, LOW); //second chance if it misses

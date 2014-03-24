@@ -50,13 +50,6 @@ location navigate(location start, location destination)  {
       delay(100);
       approachBall();
       return navigate(destination, bucket);
-//      //if miss the ball - put for other cases too
-//      if (approachBall())
-//           return navigate(destination,bucket);
-//      else {
-//          waitButton();
-//          return centre;
-//      }
       break;
     case one:
       approachBall();

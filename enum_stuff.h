@@ -1,4 +1,4 @@
-typedef enum {bucket, zero, one, two, centre, fail}location; //counts ccw from 0  
+typedef enum {bucket, zero, one, two, centre, fail, restart}location; //counts ccw from 0  
 
 #include <Arduino.h>
 
@@ -27,6 +27,8 @@ location getLoc(){
 				break;
 		case '2': target = two;
 				break;
+                case 'c': target = restart;
+                                 break;
 	} 
 
 	return target;

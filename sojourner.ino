@@ -61,8 +61,13 @@ void setup(){
 void loop(){
   
     mainDest = getLoc();  //get loc from BT
-    //if(destination == fail)
-      //destination = findLoc(); //give up and find it yourself 
+    
+    if (mainDest == restart) {
+        Serial.println("restarting");
+        currentPos = centre;
+        mainDest = getLoc();
+    }
+    
     if(mainDest !=fail)
      currentPos = navigate(currentPos, mainDest); // go there
 

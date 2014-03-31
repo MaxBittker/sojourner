@@ -39,7 +39,7 @@
 //IR setup
 #define IRpin A4
 
-#define PWMspeed 160  //(40%)  (PWMspeed)
+#define PWMspeed 160
 
 
 //encoder vs. angle

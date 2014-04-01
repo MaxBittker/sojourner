@@ -11,24 +11,27 @@ void oneeighty();
 boolean approachBucket();
 
 extern void waitButton();
-
+//a function which uses switch cases and helper functions to handle navigation from A to B
 location navigate(location start, location destination)  {
 
-  if( start == centre) //begins at center
+  if( start == centre) //cases for starting at center
   {
-    //TODO logic to spin past a certain number of lines, 
-    Serial.println("navigating from start to " );
-    Serial.print(destination-1);
+     
+    Serial.println("navigating from start to " ); //prints current journey
+    Serial.print(destination-1); 
 
     switch(destination){
-    case zero:
+    case zero: 
+
+
       analogWrite(E1, PWMspeed*.6);
       analogWrite(E2, PWMspeed*.6); 
 
       digitalWrite(M1, LOW);
       digitalWrite(M2, HIGH);
 
-      delay(300); //get off line
+      delay(300); //get off line to make sure a line sensed isn't the one we were on
+
       while(analogRead(right)>RTHRESH)
       {
         //spin right while right sensor reads white (possibly with speed as a function of time)
@@ -42,17 +45,21 @@ location navigate(location start, location destination)  {
 
         if(analogRead(left)<LTHRESH){
           Serial.println("left saw black,fixing" );
-          digitalWrite(M1, HIGH); //second chance if it misses
+          digitalWrite(M1, HIGH); //a second chance if it misses the line
           digitalWrite(M2, LOW);
         }
       }
        forward(0);
+
       delay(100);
-      approachBall();
+      //stop and wait for inertia to settle
+
+      approachBall(); //passes off control to an approach function
+
       return navigate(destination, bucket);
       break;
     case one:
-      approachBall();
+      approachBall();  //passes off control to an approach function
       return navigate(destination, bucket);
       break; 
 
@@ -65,7 +72,7 @@ location navigate(location start, location destination)  {
       delay(300); //get off line  
       while(analogRead(left)>LTHRESH)
       {
-        //spin left (possibly with speed as a function of time)
+        //spin left 
         delay(5);
       }
       //Serial.println("left saw black" );
@@ -81,6 +88,7 @@ location navigate(location start, location destination)  {
       }
       forward(0);
       delay(100);
+       //passes off control to an approach function
       approachBall();
       return navigate(destination,bucket);
       break;
@@ -110,7 +118,7 @@ location navigate(location start, location destination)  {
         Serial.println("navigating to zero");
         forward(0);
         pivot(-165);
-       delay(300); //maybe this will fix it???
+       delay(300);
         braveForray(0); //angle right
         approachBall();
         return navigate(destination,bucket);
@@ -305,7 +313,7 @@ void oneeighty( ){
       delay(450); //get off line  
       while(analogRead(left)>LTHRESH)
       {
-        //spin left (possibly with speed as a function of time)
+        //spin left 
         delay(5);
       }
       Serial.println("left saw black" );

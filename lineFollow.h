@@ -4,21 +4,19 @@
 
 void forward(int speed);
 
-//Follow a straight line and then continue driving in that straight line when range less than some value, until bump wall
+//A function utilizing line sensing to follow a straight line and then continue driving in that straight line when range less than some value, until bump wall
 boolean lineFollow(){
 	int certain = 0;
 	
 	while(true){
 		forward(PWMspeed*1.2);
 		 
-		//while side sensors white, forward - happy loop
+		//while side sensors white, go forward - robot is happy and stays in this loop
 
-		//while(analogRead(right) > RTHRESH && analogRead(left) > LTHRESH ) 
-		//{
-			//because random high value spikes
+			//IR value smoothing to know when we approach wall
 			if(analogRead(IRpin) > 380)		//if it thinks it's close
 				certain += 1;				//increase certainty
-			else if(certain>0)				//if not close, reduce certainty (butnot below 0)
+			else if(certain>0)				//if not close, reduce certainty (but not below 0)
 				certain -= 10;
 			
 			//if high IR value and high certainty

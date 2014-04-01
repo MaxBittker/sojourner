@@ -9,7 +9,7 @@ boolean lineFollow(){
 	int certain = 0;
 	
 	while(true){
-		forward(PWMspeed);
+		forward(PWMspeed*1.2);
 		 
 		//while side sensors white, forward - happy loop
 
@@ -22,7 +22,7 @@ boolean lineFollow(){
 				certain -= 10;
 			
 			//if high IR value and high certainty
-			if((analogRead(IRpin) > 380   && certain >10)|| digitalRead(leftbump) == 0 || digitalRead(rightbump)== 0)   // the "if we're close" loop (doesn't leave till bumpers happen)
+			if((analogRead(IRpin) > 380 && certain >10)|| digitalRead(leftbump) == 0 || digitalRead(rightbump)== 0)   // the "if we're close" loop (doesn't leave till bumpers happen)
 			{ 
 				Serial.println(analogRead(IRpin));
 				forward(PWMspeed*.8);	//slow down

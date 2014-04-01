@@ -9,12 +9,12 @@ boolean ObjGrab();
 extern void waitButton();
 
 boolean approachBall() {
-  Serial.println("Approaching Ball" ); //Serial Print for Testing
+  Serial.println("Approaching Ball" ); //Serial print for testing
   grip.write(GRIPopen);
-  tilt.write(TILTup);//Initialize gripper starting position
+  tilt.write(TILTup);//Set gripper starting position
   lineFollow();
-  Serial.println("Trying To Grab"); //Serial Print for Testing
-  boolean ball = ObjGrab(); //Call Function to Grab Ball/Grip Sense
+  Serial.println("Trying To Grab"); //Serial print for testing
+  boolean ball = ObjGrab(); //Call function to grab ball and grip sense
   
  
  //If ball is grabbed return true, continue navigating  
@@ -43,11 +43,13 @@ boolean ObjGrab() {
   grip.write(GRIPclose);
   delay(100);
   
-  if (analogRead(A5)>100){
-    return(true);
+  if (analogRead(A5)>100)
+  {
+    return(true); //Return true if force sensor detects ball
   }
-  else{
-    return(false);
+  else
+  {
+    return(false); //Return false if ball not detected
   }
  
 }

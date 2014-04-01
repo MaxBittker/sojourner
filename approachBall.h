@@ -1,5 +1,3 @@
-//when navigate returns a 1 and destination=0,1 or 2 - incoming (so case check outside)
-
 #include <Servo.h>
 extern Servo grip, tilt, pan;
 #include "constants.h"
@@ -11,27 +9,24 @@ boolean ObjGrab();
 extern void waitButton();
 
 boolean approachBall() {
-  Serial.println("approaching ball" );
+  Serial.println("Approaching Ball" ); //Serial Print for Testing
   grip.write(GRIPopen);
-  tilt.write(TILTup);
-  
+  tilt.write(TILTup);//Initialize gripper starting position
   lineFollow();
-  Serial.println("trying to grab");
-  boolean ball = ObjGrab();
+  Serial.println("Trying To Grab"); //Serial Print for Testing
+  boolean ball = ObjGrab(); //Call Function to Grab Ball/Grip Sense
   
-  ball = true;
-   Serial.println("grabbedball");
-   
+ 
+ //If ball is grabbed return true, continue navigating  
   if (ball == true) {
-
+    Serial.println("Grabbed Ball");
     backward(100);
-    // Serial.println("backing up" );
     delay(50);
     forward(0);
     return (true) ;
   }
   
-  //stop, wait for button press - so that can be returned to start
+//If ball is not grabbed return false, wait for reset
   if (ball == false){
     Serial.println("no ball");
     forward(0);
@@ -39,11 +34,11 @@ boolean approachBall() {
   }
 }
 
-
+//Function for grabbing the ball and grip sensing
 boolean ObjGrab() {
   
   delay(100);
-  tilt.write(TILTgrab); //move as fxn of for loop so slower
+  tilt.write(TILTgrab);
   delay(300);
   grip.write(GRIPclose);
   delay(100);
